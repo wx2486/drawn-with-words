@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="100" height="100"></svg><pre id="out"></pre>
+<script>
+const specs = [["欧拉恒等式", "400", "normal", "'Noto Serif SC', Cambria, 'Malgun Gothic', 'Nirmala UI', 'Times New Roman', serif"], ["欧拉恒等式", "500", "normal", "'Noto Serif SC', Cambria, 'Malgun Gothic', 'Nirmala UI', 'Times New Roman', serif"], ["欧拉恒等式", "600", "normal", "'Noto Serif SC', Cambria, 'Malgun Gothic', 'Nirmala UI', 'Times New Roman', serif"]]; const svg = document.getElementById('s'); const res = [];
+for (const [t, w, st, f] of specs) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  e.setAttribute('font-size', '100'); e.setAttribute('font-weight', w);
+  e.setAttribute('font-style', st); e.setAttribute('font-family', f);
+  e.setAttribute('xml:space', 'preserve'); e.textContent = t; svg.appendChild(e);
+  res.push(e.getComputedTextLength());
+}
+document.getElementById('out').textContent = 'RES' + JSON.stringify(res) + 'END';
+</script></body></html>

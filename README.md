@@ -59,8 +59,11 @@ statement.en.md     英译
     01_sea.py … 05_map.py   每张图一个脚本
     export.py        成图 → 展示页用的 JPEG
     preview.py       看图：缩略图 + 100% 裁切
+  work/              渲染和验收过程中的中间文件（见下）
 页面/                 展示页（index.html + img/）
 ```
+
+`图/work/` 是做图时留下的中间文件，原样放着：Chrome 排字用的 HTML 和截出来的字蒙版、排版测量缓存（`03_measure_cache.json`、`05_measure.json`）、图 2 的字蒙版缓存（`02_*.npy`），还有验收时看的缩略图、100% 裁切和检查图（`*_small`、`*_crop*`、`*_chk*`；带 `_v1`、`_v2`、`_v3` 的是前几轮的）。
 
 `陈述.md` 和 `简报.md` 是当时的原样，里面提到的个别文件（例如 `品味笔记.md`）是之前几轮的工作记录，不在这个仓库里。
 
@@ -79,7 +82,11 @@ statement.en.md     英译
    python -X utf8 export.py      # 成图 → 页面/img/ 的 JPEG
    ```
 
-   随机种子都是固定的。中间文件（Chrome 截图、排版测量缓存）写在 `图/work/`，不进仓库。
+   随机种子都是固定的。中间文件写在 `图/work/`。那里的缓存是在原来那台机器的字体下量的，换了机器或字体，先删掉 `图/work/` 再跑。
+
+### 许可
+
+[MIT](LICENSE)，适用于这个仓库里的代码、图和文字。图里和 `texts_*.py` 里引用的经典诗文属于原作者，不在许可范围内（绝大多数已进入公版，见上文「图里的字」）。
 
 ---
 
@@ -111,7 +118,9 @@ The main Claude session wrote the statement, made picture 1, and wrote the brief
 
 ### Files
 
-`陈述.md` (statement), `图/` (images, `简报.md` brief, `src/` scripts), `页面/` (showcase page). See the tree in the Chinese section above. `陈述.md` and `简报.md` are kept as they were written; a few files they mention (such as `品味笔记.md`) are notes from earlier rounds and are not in this repo.
+`陈述.md` (statement), `图/` (images, `简报.md` brief, `src/` scripts, `work/` intermediate files), `页面/` (showcase page). See the tree in the Chinese section above. `陈述.md` and `简报.md` are kept as they were written; a few files they mention (such as `品味笔记.md`) are notes from earlier rounds and are not in this repo.
+
+`图/work/` is kept as it was left after rendering: the HTML Chrome laid the text out in and the text masks it produced, layout measurement caches (`03_measure_cache.json`, `05_measure.json`), cached text masks for picture 2 (`02_*.npy`), and the thumbnails, 100% crops and check images used in review (`*_small`, `*_crop*`, `*_chk*`; files with `_v1`, `_v2`, `_v3` are from earlier rounds).
 
 ### Reproducing
 
@@ -120,4 +129,8 @@ Made on Windows 11 with Python 3.13 and Chrome 154; not tested elsewhere. Differ
 1. `pip install numpy opencv-python pillow scipy scikit-image numba skia-python`
 2. Chrome at `C:\Program Files\Google\Chrome\Application\chrome.exe`, or set the `CHROME` environment variable.
 3. Fonts: Noto Serif SC (install it; picture 2 reads `C:/Windows/Fonts/NotoSerifSC-VF.ttf` directly); STXingkai `STXINGKA.TTF`, STLiti `STLITI.TTF` and STKaiti (bundled with Chinese editions of Microsoft Office, not redistributable; used for the 我 brush character and seal in picture 2 and the note in picture 4); Cambria, Times New Roman, Georgia, Nirmala UI, Malgun Gothic, Segoe UI (bundled with Windows).
-4. `cd 图/src` then `python -X utf8 01_sea.py` (writes `图/01-海.png`; likewise `02_self.py` … `05_map.py`), and `python -X utf8 export.py` for the page JPEGs. Random seeds are fixed. Intermediate files go to `图/work/`, which is not tracked.
+4. `cd 图/src` then `python -X utf8 01_sea.py` (writes `图/01-海.png`; likewise `02_self.py` … `05_map.py`), and `python -X utf8 export.py` for the page JPEGs. Random seeds are fixed. Intermediate files go to `图/work/`; its caches were measured with the original machine's fonts, so on a different machine or with different fonts, delete `图/work/` first.
+
+### License
+
+[MIT](LICENSE), covering the code, images and text in this repository. The passages quoted from classic works (in the pictures and in `texts_*.py`) belong to their original authors and are not covered by this license; most are in the public domain (see "The words in the pictures" above).
